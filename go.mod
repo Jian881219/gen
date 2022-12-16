@@ -17,3 +17,5 @@ require (
 	gorm.io/hints v1.1.0
 	gorm.io/plugin/dbresolver v1.3.0
 )
+
+replace github.com/gorm-gen/gen => e.coding.net/micropoplar/proj-ourschool/gen 0.3.18
