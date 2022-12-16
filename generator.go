@@ -102,6 +102,24 @@ func (g *Generator) GenerateModel(tableName string, opts ...ModelOpt) *generate.
 	return g.GenerateModelAs(tableName, g.db.Config.NamingStrategy.SchemaName(tableName), opts...)
 }
 
+func (g *Generator) Easy(tableName string, opts ...ModelOpt) *generate.QueryStructMeta {
+
+	newOpts := make([]ModelOpt, 0, len(opts)+2)
+	newOpts = append(newOpts, FieldType("school_id", "int64"))
+	newOpts = append(newOpts, FieldType("teacher_id", "int64"))
+	newOpts = append(newOpts, FieldType("class_id", "int64"))
+	newOpts = append(newOpts, FieldType("student_id", "int64"))
+	newOpts = append(newOpts, FieldType("uid", "int64"))
+	newOpts = append(newOpts, FieldType("parent_id", "int64"))
+	newOpts = append(newOpts, FieldType("student_id", "int64"))
+	newOpts = append(newOpts, FieldType("create_time", "utils.LocalTime"))
+	newOpts = append(newOpts, FieldType("update_time", "utils.LocalTime"))
+	newOpts = append(newOpts, opts...)
+
+	return g.GenerateModelAs(tableName, strings.ToUpper(tableName), newOpts...)
+}
+
+
 // GenerateModelAs catch table info from db, return a BaseStruct
 func (g *Generator) GenerateModelAs(tableName string, modelName string, opts ...ModelOpt) *generate.QueryStructMeta {
 	meta, err := generate.GetQueryStructMeta(g.db, g.genModelConfig(tableName, modelName, opts))
